@@ -1,0 +1,25 @@
+body {
+	 min-width:550px; 
+   width: auto !important;
+   width:550px;
+}
+.snakePage {
+	margin: 0 auto;
+}
+
+.arena {
+	margin: 0 auto;
+	width: 500;
+	height: 500;
+	padding-top: 25px;
+	text-align: center;
+	background-color: red;
+	border-radius: 5px;
+}
+
+.startButtonContainer {
+	margin: 10px auto 10px auto;
+	width: 90px;
+	height: 30px;
+	text-align: center;
+}
