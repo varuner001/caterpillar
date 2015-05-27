@@ -1,4 +1,4 @@
-function runGame() {
+$(document).ready(function(){
 	//Canvas stuff
 	var canvas = $("#canvas")[0];
 	var ctx = canvas.getContext("2d");
@@ -19,14 +19,13 @@ function runGame() {
 	var direction;
 	var food;
 	var increaseSpeedLength;
-	var score = 
 
 
 	function init()
 	{
 		direction = "right"; //default direction
 		speed = 150;
-		increaseSpeedLength = 6;
+		increaseSpeedLength = 9;
 		createSnake();
 		create_food();
 
@@ -54,10 +53,15 @@ function runGame() {
 		//Because there are 45(450/10) positions accross the rows and columns
 	}
 
+
+
+
 	//paint the snake
 
-	function paint() {
-	
+
+
+	function paint()
+	{
 		// paint the background at each point
 		ctx.fillStyle = "white";
 		ctx.fillRect(0, 0, w, h);
@@ -76,7 +80,8 @@ function runGame() {
 		if(nx == -1 || nx == w/cw || ny == -1 || ny == h/cw || check_collision(nx, ny, snake))
 		{
 			//restart game
-			init();			
+			init();
+			//Lets organize the code a bit now.
 			return;
 		}
 		
@@ -85,7 +90,6 @@ function runGame() {
 		{
 			var tail = {x: nx, y: ny};			
 			//Create new food
-			score += Math.round((300/speed)*2);
 			create_food();
 		}
 		else
@@ -97,6 +101,8 @@ function runGame() {
 		if(snake.length == increaseSpeedLength) increaseSpeed();
 
 
+
+
 		for(var i = 0; i < snake.length; i++)
 		{
 			var c = snake[i];
@@ -104,10 +110,6 @@ function runGame() {
 			paint_cell(c.x, c.y);
 		}
 		paint_cell(food.x, food.y);
-
-		var scoreBoard = "Score:" + score;
-		ctx.fillText(score_text, 5, h-5);
-
 	}
 
 	function paint_cell(x, y)
@@ -133,6 +135,7 @@ function runGame() {
 	function increaseSpeed() {
 		speed -= 5;
 		increaseSpeedLength += 4;
+		clearInterval(game_loop)
 		game_loop = setInterval(paint, speed);
 	}
 
@@ -148,11 +151,4 @@ function runGame() {
 
 
 
-}
-
-$(document).ready(function(){
-	$("#gameStartButton").click(function() {
-		runGame();
-	})
-
-});
+})
